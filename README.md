@@ -10,7 +10,7 @@ Playing around with [Deno](https://deno.land/) stdlib to sift through [Kepler Ex
 ### Notes
 
 - This implementation is up-to date with the most recent version of Deno (1.5) and should have most types declared
-- BufReader from the io/bufio module has a differing type definition for the private variable buf as to the one utilized in parse from the encoding/csv module. This is circumvented for now using `any` type
+- There's a [bug](https://github.com/denoland/deno/issues/8154) with the current Deno's http/server when using unversioned imports. This causes BufReader from the io/bufio module to throw errors as they are thought to have differing type definition for the private variable buf as to the one utilized in parse from the encoding/csv module. This is either circumvented for now using `any` type, or using versioned imports like in this repo.
 - We can find exoplanets most similar to Earth along with ones with the shortest/longest oribtal periods
 
 > This was done for learning purposes as part of a Deno course

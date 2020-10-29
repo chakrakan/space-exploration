@@ -1,6 +1,6 @@
-import { join } from "https://deno.land/std/path/mod.ts";
-import { BufReader } from "https://deno.land/std/io/bufio.ts";
-import { parse } from "https://deno.land/std/encoding/csv.ts";
+import { join } from "https://deno.land/std@0.75.0/path/mod.ts";
+import { BufReader } from "https://deno.land/std@0.75.0/io/bufio.ts";
+import { parse } from "https://deno.land/std@0.75.0/encoding/csv.ts";
 // use pick to filter out only the attributes from the CSV we care about
 import pick from "https://deno.land/x/lodash@4.17.15-es/pick.js";
 
@@ -11,7 +11,7 @@ interface Planet {
 const loadPlanetData = async (): Promise<Array<Planet>> => {
   const path: string = join("data", "kepler_exoplanets_nasa.csv");
   const file: Deno.File = await Deno.open(path);
-  const bufReader: any = new BufReader(file);
+  const bufReader: BufReader = new BufReader(file);
 
   // ParsingOptions skipFirstRow without columns defined treats it as header
   const result = await parse(bufReader, {
