@@ -30,16 +30,19 @@ const loadPlanetData = async (): Promise<Array<Planet>> => {
    * - host-star mass for planets with intelligent life was found to be 0.78 M < M < 1.04 M
    * - host-star should have similar stats to our sun
    */
-  const planets = (result as Array<Planet>).filter((planet) => {
-    const planetaryRadius = Number(planet["koi_prad"]);
-    const stellarMass = Number(planet["koi_smass"]);
-    const stellarRadius = Number(planet["koi_srad"]);
-    return planet["koi_disposition"] === "CONFIRMED" && planetaryRadius > 0.5 &&
-      planetaryRadius < 1.5 && stellarMass > 0.78 && stellarMass < 1.04 &&
-      stellarRadius > 0.99 && stellarRadius < 1.01;
-  });
+  const planets: Array<Planet> = (result as Array<Planet>).filter(
+    (planet: Planet) => {
+      const planetaryRadius = Number(planet["koi_prad"]);
+      const stellarMass = Number(planet["koi_smass"]);
+      const stellarRadius = Number(planet["koi_srad"]);
+      return planet["koi_disposition"] === "CONFIRMED" &&
+        planetaryRadius > 0.5 &&
+        planetaryRadius < 1.5 && stellarMass > 0.78 && stellarMass < 1.04 &&
+        stellarRadius > 0.99 && stellarRadius < 1.01;
+    },
+  );
 
-  return planets.map((planet) => {
+  return planets.map((planet: Planet) => {
     return pick(planet, [
       "kepler_name",
       "koi_prad",
