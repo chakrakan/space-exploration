@@ -8,7 +8,7 @@ interface Planet {
   [key: string]: string;
 }
 
-async function loadPlanetData(): Promise<Array<Planet>> {
+const loadPlanetData = async (): Promise<Array<Planet>> => {
   const path: string = join("data", "kepler_exoplanets_nasa.csv");
   const file: Deno.File = await Deno.open(path);
   const bufReader: any = new BufReader(file);
@@ -50,7 +50,7 @@ async function loadPlanetData(): Promise<Array<Planet>> {
       "koi_period",
     ]);
   });
-}
+};
 
 const newEarths: Array<Planet> = await loadPlanetData();
 console.log(`${newEarths.length} habitable planets found! Here they are:`);
@@ -58,7 +58,7 @@ for (const planet of newEarths) {
   console.log(planet);
 }
 
-async function getOrbitalData(newEarthData: Array<Planet>): Promise<void> {
+const getOrbitalData = async (newEarthData: Array<Planet>): Promise<void> => {
   let min: number = 0;
   let max: number = 0;
   for (let i = 0; i < newEarthData.length; i++) {
@@ -85,6 +85,6 @@ async function getOrbitalData(newEarthData: Array<Planet>): Promise<void> {
       newEarthData[max]["kepler_name"]
     } at ${newEarthData[max]["koi_period"]} days.`,
   );
-}
+};
 
 await getOrbitalData(newEarths);
