@@ -14,7 +14,7 @@ const loadPlanetData = async (): Promise<Array<Planet>> => {
   const bufReader: BufReader = new BufReader(file);
 
   // ParsingOptions skipFirstRow without columns defined treats it as header
-  const result = await parse(bufReader, {
+  const result: Array<unknown> = await parse(bufReader, {
     skipFirstRow: true,
     comment: "#",
   });
